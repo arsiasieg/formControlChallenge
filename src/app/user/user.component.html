@@ -1,29 +1,35 @@
-<p>
-    <label type="text">User : 
-        <input type="text" [formControl]="userName">
-    </label>
-</p>
-<p>
-    <label type="text">Mail : 
-        <input type="text" [formControl]="mail">
-    </label>
-</p>
-<p>
-    <label type="text">Password : 
-        <input type="text" [formControl]="password">
-    </label>
-</p>
-<p>
-    <label type="text">Adress : 
-        <input type="text" [formControl]="adress">
-    </label>
-</p>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <p>
+        <label type="text">User : 
+            <input type="text" formControlName="userName">
+        </label>
+    </p>
 
-<button type="submit" (click)="inscription()">Inscription</button><br>
-
-<p>
-    {{newUser.userName}}<br>
-    {{newUser.mail}}<br>
-    {{newUser.password}}<br>
-    {{newUser.adress}}
-</p>
+    <div formGroupName ="credentials">
+        <p>
+            <label type="text">Mail : 
+                <input type="text" formControlName="mail">
+            </label>
+        </p>
+        <p>
+            <label type="text">Password : 
+                <input type="text" formControlName="password">
+            </label>
+        </p>
+    </div>
+    <div formGroupName = "adress">
+        <p>
+            <label type="text">Street : 
+                <input type="text" formControlName="street">
+            </label>
+            <label type="text">City : 
+                <input type="text" formControlName="city">
+            </label>
+            <label type="text">Zipcode : 
+                <input type="text" formControlName="zipCode">
+            </label>
+        </p>
+    </div>
+    
+    <button type="submit" [disabled]="!userForm.valid">Inscription</button><br>
+</form>
