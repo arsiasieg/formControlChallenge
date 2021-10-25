@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { User } from '../app.component';
+import { emailValidator } from './email-validator.component';
+import { passwordValidator } from './password-validation.component';
+
 
 @Component({
   selector: 'app-user',
@@ -10,16 +13,12 @@ import { User } from '../app.component';
 export class UserComponent {
 
   userForm = this.fb.group({
-    userName: [''],
+    userName: ['', [Validators.required, Validators.minLength(4)]],
     credentials : this.fb.group({
-      mail: [''],
-      password: [''],
+      mail: ['', [Validators.required, emailValidator]],
+      password: ['', [Validators.required, passwordValidator]],
     }),
-    adress: this.fb.group({
-      street:[''],
-      city: [''],
-      zipCode: ['']
-    }),
+    adress:['']
   })
 
   newUser: User = new User;
